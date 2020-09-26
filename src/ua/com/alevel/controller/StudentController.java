@@ -14,7 +14,7 @@ public class StudentController {
 
     private StudentService studentService = new StudentService();
 
-    public void createStudent() {
+    public void runConsole() {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             while (true) {
                 System.out.println("Input");
@@ -22,17 +22,46 @@ public class StudentController {
                 switch (num) {
                     case 1 : {
                         String name = reader.readLine();
-                        Student student = new Student();
-                        student.setName(name);
-                        studentService.createStudent(student);
+                        createStudent(name);
                     } break;
                     case 2 : {
                         String id = reader.readLine();
-                        System.out.println("student: " + studentService.readById(id));
+                        getStudentById(id);
+                    } break;
+                    case 3 : {
+                        String id = reader.readLine();
+                        deleteStudent(id);
+                    } break;
+                    case 4 : {
+                        String id = reader.readLine();
+                        String name = reader.readLine();
+                        updateStudent(id, name);
                     }
                 }
             }
         } catch (Exception e) {
+            System.out.println("e = " + e.getMessage());
         }
+    }
+
+    private void createStudent(String name) {
+        Student student = new Student();
+        student.setName(name);
+        studentService.createStudent(student);
+    }
+
+    private void getStudentById(String id) {
+        Student student = studentService.readById(id);
+        System.out.println("student = " + student);
+    }
+
+    private void deleteStudent(String id) {
+        studentService.delete(id);
+    }
+
+    private void updateStudent(String id, String name) {
+        Student student = studentService.readById(id);
+        student.setName(name);
+        studentService.updateStudent(student);
     }
 }

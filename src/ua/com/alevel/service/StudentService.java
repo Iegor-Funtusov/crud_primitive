@@ -15,7 +15,22 @@ public class StudentService {
         studentDao.createStudent(student);
     }
 
+    public void updateStudent(Student student) {
+        studentDao.updateStudent(student);
+    }
+
     public Student readById(String id) {
         return studentDao.readById(id);
+    }
+
+    public Object[] getAll() {
+        return studentDao.getAll();
+    }
+
+    public void delete(String id) {
+        if (id == null) {
+            return;
+        }
+        studentDao.delete(id);
     }
 }
