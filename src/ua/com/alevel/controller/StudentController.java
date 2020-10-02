@@ -14,6 +14,10 @@ public class StudentController {
 
     private StudentService studentService = new StudentService();
 
+    public StudentController() {
+
+    }
+
     public void runConsole() {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             while (true) {
@@ -63,5 +67,12 @@ public class StudentController {
         Student student = studentService.readById(id);
         student.setName(name);
         studentService.updateStudent(student);
+    }
+
+    @Override
+    public String toString() {
+        return "StudentController{" +
+                "studentService=" + studentService +
+                '}';
     }
 }
